@@ -466,59 +466,452 @@
 // storage.removeItem('Prolonger');
 // console.log(storage.getItems()); // ["Nanitoids", "Antigravitator", "Droid"]
 
-// 11
-// Задача: конструктор строк
+// // 11
+// // Задача: конструктор строк
+// // Задание
+// // Напиши класс StringBuilder, который принимает один параметр initialValue - произвольную строку, которая записывается на создаваемый объект в свойство value.
+
+// // Объяви следующие методы класса:
+
+// // getValue() - возвращает текущее значение свойства value.
+// // padEnd(str) - получает парметр str (строку) и добавляет её в конец значения свойства value объекта который вызывает этот метод.
+// // padStart(str) - получает парметр str (строку) и добавляет её в начало значения свойства value объекта который вызывает этот метод.
+// // padBoth(str) - получает парметр str (строку) и добавляет её в начало и в конец значения свойства value объекта который вызывает этот метод.
+// // Под комментарием мы добавили инициализацию экземпляра и вызовы методов в той последовательности, в которой твой код будут проверять тесты. Пожалуйста ничего там не меняй.
+
+// // Тесты
+// // Объявлен класс StringBuilder
+// // В классе StringBuilder объявлен метод getValue
+// // Метод getValue возвращает значение свойства value экземпляра класса который его вызывает
+// // В классе StringBuilder объявлен метод padEnd
+// // Метод padEnd изменяет свойство value экземпляра класса, который его вызывает
+// // В классе StringBuilder объявлен метод padStart
+// // Метод padStart изменяет свойство value экземпляра класса который его вызывает
+// // В классе StringBuilder объявлен метод padBoth
+// // Метод padBoth изменяет свойство value экземпляра класса который его вызывает
+// // В результате вызова new StringBuilder(".") значение переменной builder это объект
+// // У объекта builder есть свойство value
+// // Первый вызов builder.getValue(), сразу после инциализации экземпляра, возвращает строку .
+// // Второй вызов builder.getValue(), после вызова builder.padStart("^"), возвращает строку ^.
+// // Третий вызов builder.getValue(), после вызова builder.padEnd("^"), возвращает строку ^.^
+// // Четвёртый вызов builder.getValue(), после вызова builder.padBoth("="), возвращает строку =^.^=
+
+// class StringBuilder {
+//   constructor(initialValue) {
+//     this.value = initialValue;
+//   }
+//   getValue() {
+//     return this.value;
+//   }
+//   padEnd(str) {
+//     // this.value = this.value + str;
+//   }
+//   padStart(str) {
+//     this.value = str + this.value;
+//   }
+//   padBoth(str) {
+//     this.padStart(str);
+//     this.padEnd(str);
+//   }
+// }
+// // class StringBuilder {
+// //   constructor(initialValue) {
+// //     this.value = initialValue;
+// //   }
+// //   getValue() {
+// //     return this.value;
+// //   }
+// //   padEnd(initialValue) {
+// //     this.value = this.value + initialValue;
+// //   }
+// //   padStart(initialValue) {
+// //     this.value = initialValue + this.value;
+// //   }
+// //   padBoth(initialValue) {
+// //     this.padStart(initialValue);
+// //     this.padEnd(initialValue);
+// //   }
+// // }
+
+// // Change code above this line
+// const builder = new StringBuilder('.');
+// console.log(builder.getValue()); // "."
+// builder.padStart('^');
+// console.log(builder.getValue()); // "^."
+// builder.padEnd('^');
+// console.log(builder.getValue()); // "^.^"
+// builder.padBoth('=');
+// console.log(builder.getValue()); // "=^.^="
+
+// // 12
+// // Приватные свойства
+// // Инкапсуляция - это концепция, предписывающая скрывать то, как устроен класс. Пользователь класса должен получать доступ только к публичному интерфейсу - набору публичных свойств и методов класса. Остальные методы и свойства (не публичные) должны быть не доступны.
+
+// // В классах инкапсуляция реализуется приватными свойствами, доступ к которым можно получить только внутри класса.
+
+// // Допустим, почта пользователя должна быть недоступна для прямого изменения из вне, то есть приватна. Добавляя к имени свойства символ # мы делаем его приватным. Объявление приватного свойства до инциализации в конструкторе - обязательно.
+
+// // class User {
+// //   // Необязательное объявление публичных свойств
+// //   name;
+// //   // Обязательное объявление приватных свойств
+// //   #email;
+
+// //   constructor({ name, email }) {
+// //     this.name = name;
+// //     this.#email = email;
+// //   }
+
+// //   getEmail() {
+// //     return this.#email;
+// //   }
+
+// //   changeEmail(newEmail) {
+// //     this.#email = newEmail;
+// //   }
+// // }
+
+// // const mango = new User({
+// //   name: "Mango",
+// //   email: "mango@mail.com",
+// // });
+// // mango.changeEmail("mango@supermail.com");
+// // console.log(mango.getEmail()); // mango@supermail.com
+// // console.log(mango.#email); // Будет ошибка, это приватное свойство
+// // Методы класса также могут быть приватными, то есть доступны только в теле класса. Для этого перед их именем необходимо поставить символ #.
+
+// // Задание
+// // Выполни рефакторинг класса Car так, чтобы свойство brand было приватным и добавь два метода для публичного интерфейса, для чтения и изменения этого свойства.
+
+// // getBrand() - возвращает значение приватного свойства brand.
+// // changeBrand(newBrand) - изменяет значение приватного свойства brand на newBrand.
+// // Тесты
+// // Объявлен класс Car
+// // Свойство brand в классе Car объявлено приватным
+// // Конструктор класса принимает объект со свойствами brand, model и price
+// // В результате вызова new Car({ brand: "Audi", model: "Q3", price: 36000 }) получится объект { model: "Q3", price: 36000 }
+// // В результате вызова new Car({ brand: "bmw", model: "X5", price: 58900 }) получится объект { model: "X5", price: 58900 }
+// // В результате вызова new Car({ brand: "Nissan", model: "Murano", price: 31700 }) получится объект { model: "Murano", price: 31700 }
+// // У экземпляра нет публичного свойства brand
+// // Метод getBrand() возвращает значение приватного свойства brand.
+// // Метод changeBrand("Honda") изменяет значение приватного свойства brand на "Honda"
+
+// class Car {
+//   // Change code below this line
+//   #brand;
+//   constructor({ brand, model, price }) {
+//     this.#brand = brand;
+//     this.model = model;
+//     this.price = price;
+//   }
+//   getBrand() {
+//     return this.#brand;
+//   }
+//   changeBrand(newBrand) {
+//     this.#brand = newBrand;
+//   }
+
+//   // Change code above this line
+// }
+
+// // 13
+// // Задача: склад 2.0
+// // Задание
+// // Выполни рефакторинг класса Storage, сделав свойство items приватным.
+
+// // Под комментарием мы добавили инициализацию экземпляра и вызовы методов в той последовательности, в которой твой код будут проверять тесты. Пожалуйста ничего там не меняй.
+
+// // Тесты
+// // Объявлен класс Storage
+// // У объекта storage нет свойства items
+// // В классе Storage объявлен метод getItems
+// // В классе Storage объявлен метод addItem
+// // В классе Storage объявлен метод removeItem
+// // Свойство items в классе Storage объявлено приватным
+// // Конструктор класса принимает свойство items
+// // В результате вызова new Storage(["Nanitoids", "Prolonger", "Antigravitator"]) значение переменной storage это объект
+// // Первый вызов storage.getItems(), сразу после инциализации экземпляра, возвращает массив ["Nanitoids", "Prolonger", "Antigravitator"]
+// // Второй вызов, storage.getItems(), после вызова storage.addItem("Droid"), возвращает массив ["Nanitoids", "Prolonger", "Antigravitator", "Droid"]
+// // Третий вызов storage.getItems(), после вызова storage.removeItem("Prolonger"), возвращает массив ["Nanitoids", "Antigravitator", "Droid"]
+// class Storage {
+//   // Change code below this line
+//   #items;
+//   constructor(items) {
+//     this.#items = items;
+//   }
+
+//   getItems() {
+//     return this.#items;
+//   }
+
+//   addItem(newItem) {
+//     this.#items.push(newItem);
+//   }
+
+//   removeItem(itemToRemove) {
+//     this.#items = this.#items.filter((item) => item !== itemToRemove);
+//   }
+// }
+
+// // Change code above this line
+// const storage = new Storage(['Nanitoids', 'Prolonger', 'Antigravitator']);
+// console.log(storage.getItems()); // ["Nanitoids", "Prolonger", "Antigravitator"]
+// storage.addItem('Droid');
+// console.log(storage.getItems()); // ["Nanitoids", "Prolonger", "Antigravitator", "Droid"]
+// storage.removeItem('Prolonger');
+// console.log(storage.getItems()); // ["Нанитоиды", "Антигравитатор", "Droid"]
+
+// // 14
+// // Задача: конструктор строк 2.0
+// // Задание
+// // Выполни рефакторинг класса StringBuilder, сделав свойство value приватным.
+
+// // Под комментарием мы добавили инициализацию экземпляра и вызовы методов в той последовательности, в которой твой код будут проверять тесты. Пожалуйста ничего там не меняй.
+
+// // Тесты
+// // Объявлен класс StringBuilder
+
+// // Свойство value в классе StringBuilder объявлено приватным
+
+// // В классе StringBuilder объявлен метод getValue
+
+// // В классе StringBuilder объявлен метод padEnd
+
+// // В классе StringBuilder объявлен метод padStart
+
+// // В классе StringBuilder объявлен метод padBoth
+
+// // В результате вызова new StringBuilder('.') значение переменной builder это объект
+
+// // У объекта builder нет свойства value
+
+// // Первый вызов builder.getValue(), сразу после инциализации экземпляра, возвращает строку .
+
+// // Второй вызов builder.getValue(), после вызова builder.padStart("^"), возвращает строку ^.
+
+// // Третий вызов builder.getValue(), после вызова builder.padEnd("^"), возвращает строку ^.^
+
+// // Четвёртый вызов builder.getValue(), после вызова builder.padBoth("="), возвращает строку =^.^=
+
+// class StringBuilder {
+//   // Change code below this line
+//   #value;
+//   constructor(initialValue) {
+//     this.#value = initialValue;
+//   }
+
+//   getValue() {
+//     return this.#value;
+//   }
+
+//   padEnd(str) {
+//     this.#value += str;
+//   }
+
+//   padStart(str) {
+//     this.#value = str + this.#value;
+//   }
+
+//   padBoth(str) {
+//     this.padStart(str);
+//     this.padEnd(str);
+//   }
+// }
+
+// // Change code above this line
+// const builder = new StringBuilder('.');
+// console.log(builder.getValue()); // "."
+// builder.padStart('^');
+// console.log(builder.getValue()); // "^."
+// builder.padEnd('^');
+// console.log(builder.getValue()); // "^.^"
+// builder.padBoth('=');
+// console.log(builder.getValue()); // "=^.^="
+
+// // 15
+// // Геттеры и сеттеры
+// // Геттеры и сеттеры - это более краткий синтаксис объявления методов для взаимодействия со свойствами. Геттер и сеттер имитируют обычное публичное свойство класса, но позволяют изменять другие свойства более удобным способом. Геттер выполняется при попытке получить значение свойства, а сеттер - при попытке его изменить.
+
+// // Геттеры и сеттеры хорошо использовать для простых операций чтения и изменения значения свойств, особенно приватных, как их публичный интерфейс. Для работы со свойством которое хранит массив или объект они не подойдут.
+
+// // class User {
+// //   #email;
+
+// //   constructor({ name, email }) {
+// //     this.name = name;
+// //     this.#email = email;
+// //   }
+
+// //   // Геттер email
+// //   get email() {
+// //     return this.#email;
+// //   }
+
+// //   // Сеттер email
+// //   set email(newEmail) {
+// //     this.#email = newEmail;
+// //   }
+// // }
+// // Мы объявили геттер и сеттер email поставив перед именем свойства ключевые слова get и set. Внутри этих методов мы или возвращаем значение приватного свойства #email или изменяем его значение. Геттер и сеттер идут впаре и должны называться одинаково.
+
+// // const mango = new User({ name: "Mango", email: "mango@mail.com" });
+// // console.log(mango.email); // mango@mail.com
+// // mango.email = "mango@supermail.com";
+// // console.log(mango.email); // mango@supermail.com
+// // При обращении к mango.email вызызвается геттер get email() {...} и выполняется его код. При попытке записи mango.email = "mango@supermail.com" вызывается сеттер set email(newEmail) {...} и строка "mango@supermail.com" будет значением параметра newEmail.
+
+// // Плюс в том, что это методы, а значит при записи можно выполнить дополнительный код, например с какими-то проверками, в отличии от выполнениях этой же операции напрямую со свойством.
+
+// // set email(newEmail) {
+// //   if(newEmail === "") {
+// //     console.error("Ошибка! Почта не может быть пустой строкой!");
+// //     return;
+// //   }
+
+// //   this.#email = newEmail;
+// // }
+// // Задание
+// // Выполни рефакторинг класса Car. Сделай свойства model и price приватными, также как #brand. Стандартизируй публичный интерфейс класса заменив уже объявленные методы на геттеры и сеттеры brand, model и price для взаимодействия с приватными свойствами.
+
+// // Тесты
+// // Объявлен класс Car
+// // В классе Car объявлено приватное свойство brand
+// // В классе Car объявлено приватное свойство model
+// // В классе Car объявлено приватное свойство price
+// // Конструктор класса принимает объект со свойствами brand, model и price
+// // В классе Car объявлен геттер brand
+// // В классе Car объявлен сеттер brand
+// // В классе Car объявлен геттер model
+// // В классе Car объявлен сеттер model
+// // В классе Car объявлен геттер price
+// // В классе Car объявлен сеттер price
+
+// class Car {
+//   // Change code below this line
+//   #brand;
+//   #model;
+//   #price;
+//   constructor({ brand, model, price }) {
+//     this.#brand = brand;
+//     this.#model = model;
+//     this.#price = price;
+//   }
+
+//   get brand() {
+//     return this.#brand;
+//   }
+
+//   set brand(newBrand) {
+//     this.#brand = newBrand;
+//   }
+
+//   get model() {
+//     return this.#model;
+//   }
+
+//   set model(newModel) {
+//     this.#model = newModel;
+//   }
+
+//   get price() {
+//     return this.#price;
+//   }
+
+//   set price(newPrice) {
+//     this.#price = newPrice;
+//   }
+//   // Change code above this line
+// }
+
+// 16
+// Статические свойства
+// Кроме публичных и приватных свойств будущего экземпляра, в классе можно объявить его собственные свойства, доступные только классу, но не его экземплярам - статические свойства (static). Они полезны для хранения информации относящейся к самому классу.
+
+// Добавим классу пользователя приватное свойство role - его роль, определяющую набор прав, например администратор, редактор, просто пользователь и т п. Возможные роли пользователей будем хранить как статическое свойство Roles - объект со свойствами.
+
+// Статические свойства объявляются в теле класса. Перед именем свойства добавляется ключевое слово static.
+
+// class User {
+//   // Объявление и инициализация статического свойства
+//   static Roles = {
+//     ADMIN: "admin",
+//     EDITOR: "editor",
+//   };
+
+//   #email;
+//   #role;
+
+//   constructor({ email, role }) {
+//     this.#email = email;
+//     this.#role = role;
+//   }
+
+//   get role() {
+//     return this.#role;
+//   }
+
+//   set role(newRole) {
+//     this.#role = newRole;
+//   }
+// }
+
+// const mango = new User({
+//   email: "mango@mail.com",
+//   role: User.Roles.ADMIN,
+// });
+
+// console.log(mango.Roles); // undefined
+// console.log(User.Roles); // { ADMIN: "admin", EDITOR: "editor" }
+
+// console.log(mango.role); // "admin"
+// mango.role = User.Roles.EDITOR;
+// console.log(mango.role); // "editor"
+// Статические свойства также могут быть приватные, то есть доступные только внутри класса. Для этого имя совйства должно начинаться с символа #, также как приватные свойства. Обращение к приватному статическому свойству вне тела класса вызовет ошибку.
+
 // Задание
-// Напиши класс StringBuilder, который принимает один параметр initialValue - произвольную строку, которая записывается на создаваемый объект в свойство value.
+// Выполни рефакторинг класса Car. Добавь публичное статическое свойство MAX_PRICE со значением 50000 - максимально допустимая цена автомобиля.
 
-// Объяви следующие методы класса:
-
-// getValue() - возвращает текущее значение свойства value.
-// padEnd(str) - получает парметр str (строку) и добавляет её в конец значения свойства value объекта который вызывает этот метод.
-// padStart(str) - получает парметр str (строку) и добавляет её в начало значения свойства value объекта который вызывает этот метод.
-// padBoth(str) - получает парметр str (строку) и добавляет её в начало и в конец значения свойства value объекта который вызывает этот метод.
-// Под комментарием мы добавили инициализацию экземпляра и вызовы методов в той последовательности, в которой твой код будут проверять тесты. Пожалуйста ничего там не меняй.
+// Добавь сеттеру price проверку передаваемого значения параметра newPrice. Если оно больше чем MAX_PRICE, сеттер ничего не делает, а если меньше или равно, то перезаписывает цену автомобиля.
 
 // Тесты
-// Объявлен класс StringBuilder
-// В классе StringBuilder объявлен метод getValue
-// Метод getValue возвращает значение свойства value экземпляра класса который его вызывает
-// В классе StringBuilder объявлен метод padEnd
-// Метод padEnd изменяет свойство value экземпляра класса, который его вызывает
-// В классе StringBuilder объявлен метод padStart
-// Метод padStart изменяет свойство value экземпляра класса который его вызывает
-// В классе StringBuilder объявлен метод padBoth
-// Метод padBoth изменяет свойство value экземпляра класса который его вызывает
-// В результате вызова new StringBuilder(".") значение переменной builder это объект
-// У объекта builder есть свойство value
-// Первый вызов builder.getValue(), сразу после инциализации экземпляра, возвращает строку .
-// Второй вызов builder.getValue(), после вызова builder.padStart("^"), возвращает строку ^.
-// Третий вызов builder.getValue(), после вызова builder.padEnd("^"), возвращает строку ^.^
-// Четвёртый вызов builder.getValue(), после вызова builder.padBoth("="), возвращает строку =^.^=
+// Объявлен класс Car
+// У класса Car есть статическое свойство MAX_PRICE
+// Значение статического свойства MAX_PRICE это число 50000
+// У экземпляра нет свойства MAX_PRICE
+// В классе Car объявлен геттер price
+// В классе Car объявлен сеттер price
+// Вызов сеттера price у экземпляра класса, со значением аргумента меньше чем значение MAX_PRICE, изменяет свойство #price
+// Вызов сеттера price у экземпляра класса, со значением аргумента больше чем значение MAX_PRICE, не изменяет свойство #price
 
-class StringBuilder {
-  constructor(initialValue) {
-    this.value = initialValue;
+class Car {
+  // Change code below this line
+  static MAX_PRICE = 50000;
+  max_price;
+  #price;
+
+  constructor({ price }) {
+    this.#price = price;
+    Car.max_price = Car.MAX_PRICE;
   }
-  getValue() {
-    console.log(this.value);
-    return this.value;
-    console.log(this.value);
+
+  get price() {
+    return this.#price;
   }
-  padEnd(str) {
-    this.value.push(str);
+
+  set price(newPrice) {
+    if (newPrice <= Car.max_price) {
+      this.#price = newPrice;
+    }
   }
-  padStart(str) {
-    this.value.shift(str);
-  }
-  padBoth(str) {}
+
+  // Change code above this line
 }
-// Change code above this line
-const builder = new StringBuilder('.');
-console.log(builder.getValue()); // "."
-builder.padStart('^');
-console.log(builder.getValue()); // "^."
-builder.padEnd('^');
-console.log(builder.getValue()); // "^.^"
-builder.padBoth('=');
-console.log(builder.getValue()); // "=^.^="
+
+const audi = new Car({ price: 35000 });
+console.log(audi.price); // 35000
+
+audi.price = 49000;
+console.log(audi.price); // 49000
+
+audi.price = 51000;
+console.log(audi.price); // 49000
